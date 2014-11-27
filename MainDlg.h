@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CMainDlg ¶Ô»°¿ò
@@ -26,4 +27,11 @@ public:
 
 	bool Show_picture(CString imgPath);
 	afx_msg void OnPaint();
+	bool isPointInRect(CPoint point ,CRect rect);
+
+	float xScale;
+	float yScale;
+	CEdit m_editsearchctrl;
+	CString m_editsearchtxt;
+	CString imgfile;
 };

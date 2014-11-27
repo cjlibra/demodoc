@@ -7,12 +7,16 @@
 #include "afxdialogex.h"
 
 
+#include "FirstDlg.h"
+
+
 // CMainDlg 对话框
 
 IMPLEMENT_DYNAMIC(CMainDlg, CDialogEx)
 
 CMainDlg::CMainDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMainDlg::IDD, pParent)
+	, m_editsearchtxt(_T(""))
 {
 
 }
@@ -24,11 +28,20 @@ CMainDlg::~CMainDlg()
 void CMainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_EDIT1, m_editsearchctrl);
+	DDX_Text(pDX, IDC_EDIT1, m_editsearchtxt);
 }
 BOOL CMainDlg::OnInitDialog()
 {
 	ShowWindow(SW_MAXIMIZE);
-	Show_picture(_T("aaa.png"));
+	CRect rect6(1110,168, 1671,228);
+	
+	
+	imgfile = _T("res\\0.jpg");
+	Show_picture(imgfile);
+
+	CEdit *editp =(CEdit *) GetDlgItem(IDC_EDIT1);
+	editp->MoveWindow( 1110*xScale,168*yScale, (1671-1110)*xScale,(228-168)*yScale );
 	CDialogEx::OnInitDialog();
 	return TRUE; 
 }
@@ -55,13 +68,37 @@ void CMainDlg::OnLButtonUp(UINT nFlags, CPoint point)
 void CMainDlg::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CRect rect1(1018, 478 ,  1112 ,507);
+	CRect rect2(485 , 604,  752 ,852); //mingchengdengji
+	CRect rect3(869,625,1123,8490); //neizhidengji
+	CRect rect4(1246,606, 1149,842); //waizhidengji
+	CRect rect5(1673,162, 1856,226); //shousuoanniu
+	CRect rect6(1110,168, 1671,228);//shurukuang
+	if (true == isPointInRect(point,rect2)){
+		//AfxMessageBox(_T("bingo"));
+		CFirstDlg dlg;
+		dlg.DoModal();
+		
+	}
 	TCHAR tmpstr[255];
 	wsprintf(tmpstr,_T("x is %d  y is %d"),point.x,point.y);
-	AfxMessageBox(_T("down"));
-	AfxMessageBox(tmpstr);
+	//AfxMessageBox(_T("down"));
+	//AfxMessageBox(tmpstr);
 	CDialogEx::OnLButtonDown(nFlags, point);
 }
 
+bool CMainDlg::isPointInRect(CPoint point ,CRect rect)
+{
+	float a = xScale*rect.left;
+	float b = yScale*rect.top;
+	float c = xScale*rect.right;
+	float d = yScale*rect.bottom;
+	if (point.x > a &&  point.y> b  && point.x < c  && point.y< d){
+
+		return true;
+	}
+	return false;
+}
 
 void CMainDlg::OnBnClickedButton1()
 {
@@ -84,7 +121,8 @@ bool CMainDlg::Show_picture(CString imgPath)
 	this->GetClientRect(&rect); //获得pictrue控件所在的矩形区域
 	CDC *pDc = this->GetDC();//获得pictrue控件的Dc
 	SetStretchBltMode(pDc->m_hDC,STRETCH_HALFTONE); 
-
+	xScale=(float)rect.Width()/(float)width;
+	yScale=(float)rect.Height()/(float)height;
 	if(width<=rect.Width() && height<=rect.Width()) //小图片，不缩放
 	{
 	rect1 = CRect(rect.TopLeft(), CSize(width,height));
@@ -93,8 +131,8 @@ bool CMainDlg::Show_picture(CString imgPath)
 	}
 	else
 	{
-	float xScale=(float)rect.Width()/(float)width;
-	float yScale=(float)rect.Height()/(float)height;
+	xScale=(float)rect.Width()/(float)width;
+	yScale=(float)rect.Height()/(float)height;
 	float ScaleIndex=(xScale<=yScale?xScale:yScale);
 	rect1 = CRect(rect.TopLeft(), CSize((int)width*ScaleIndex,(int)height*ScaleIndex));
 	image.StretchBlt(pDc->m_hDC,rect,SRCCOPY); //将图片画到Picture控件表示的矩形区域
@@ -108,5 +146,5 @@ void CMainDlg::OnPaint()
 	CPaintDC dc(this); // device context for painting
 	// TODO: 在此处添加消息处理程序代码
 	// 不为绘图消息调用 CDialogEx::OnPaint()
-	Show_picture(_T("aaa.png"));
+	Show_picture(imgfile);
 }
