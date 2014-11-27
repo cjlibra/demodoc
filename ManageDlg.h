@@ -1,4 +1,5 @@
 #pragma once
+#include "afxcmn.h"
 
 
 // CManageDlg 对话框
@@ -16,8 +17,10 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+	virtual BOOL  OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButton1();
+	CListCtrl m_contentlistctrl;
 };

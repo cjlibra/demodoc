@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-#include "ManageDlg.h"
+#include "LoginDlg.h"
 #include "MainDlg.h"
 
 
@@ -67,6 +67,6 @@ void CChooseDlg::OnBnClickedButton1()
 
 void CChooseDlg::OnBnClickedButton2()
 {
-	CManageDlg dlg;
+	CLoginDlg dlg;
 	dlg.DoModal();
 }
