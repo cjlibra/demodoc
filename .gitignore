@@ -1,3 +1,5 @@
+ipch
+黄埔自助服务材料
 Release
 Debug
 *.ncb
@@ -6,4 +8,5 @@ Debug
 *.aps
 *.plg
 *.sdf
+*.exe
 *~

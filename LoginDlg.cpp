@@ -45,13 +45,18 @@ BOOL CLoginDlg::OnInitDialog()
     }
       
     printf("数据库连接成功!\n");
+	::SetWindowPos(CWnd::wndNoTopMost,0,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
+	::BringWindowToTop(CWnd::wndNoTopMost);
 	CDialogEx::OnInitDialog();
+
+	
 	return TRUE; 
 
 }
 
 BEGIN_MESSAGE_MAP(CLoginDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CLoginDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CLoginDlg::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 
@@ -91,4 +96,10 @@ int CLoginDlg::_sql_callback(void * notused, int argc, char ** argv, char ** szC
   username_db = CString(argv[1]);
   password_db = CString(argv[2]);
   return 0;
- }
+}
+
+void CLoginDlg::OnBnClickedCancel()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDialogEx::OnCancel();
+}

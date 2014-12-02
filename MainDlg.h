@@ -34,4 +34,10 @@ public:
 	CEdit m_editsearchctrl;
 	CString m_editsearchtxt;
 	CString imgfile;
+	int mynum;
+	CFont   font;
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	int  SearchDir(char *path,CString *pstr);
+	CString searchdir;
+	
 };

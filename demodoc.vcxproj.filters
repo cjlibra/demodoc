@@ -22,6 +22,117 @@
     <None Include="res\demodoc.ico">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\aaa.jpg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\101.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\102.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\beian.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\defaultbutton.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\biangeng.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\biaoge.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\ds.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\fddb.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\gd.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\gerendizi.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\gerenduzi.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\gs.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\gsfb.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\hezibianduzi.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\hhqy.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\hwhuoqiye.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\hzyxgs.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\jl.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\js.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\jz.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\leixinhub.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\qita.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\qsz.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\Untitled-1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\waizi1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\waizi2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\waizi3.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\waizi4.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\waizi5.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\yangz.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\yirenbianhezi.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\yirenyoux.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\zc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\zhuxiao.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\zz.bmp">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demodoc.h">
@@ -69,6 +180,15 @@
     <ClInclude Include="AddinfoDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ContentListDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DirListCtrlDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileListDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="demodoc.cpp">
@@ -108,6 +228,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AddinfoDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentListDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DirListCtrlDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileListDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

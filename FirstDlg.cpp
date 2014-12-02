@@ -39,6 +39,16 @@ BOOL CFirstDlg::OnInitDialog()
 
 	CEdit *editp =(CEdit *) GetDlgItem(IDC_EDIT1);
 	editp->MoveWindow( rect.left*xScale,rect.top*yScale, (rect.right-rect.left)*xScale,(rect.bottom-rect.top)*yScale );
+	
+	LOGFONT lf;     
+      
+	memset(&lf,0,sizeof(lf));   
+	lf.lfHeight = 35;  //改变大小  
+	lf.lfCharSet = GB2312_CHARSET;
+	font.CreateFontIndirect(&lf) ;	
+	editp->SetFont(&font,TRUE);
+	
+	
 	CDialogEx::OnInitDialog();
 	return TRUE; 
 }
@@ -66,6 +76,29 @@ void CFirstDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	CRect rect7(1139,173,1320,238);//sousuoanniu
 	if (true == isPointInRect( point ,  rect1)){
 		CSecondDlg dlg;
+		mynum = 1000;
+		dlg.fromwherenum = mynum+fromwherenum;
+		dlg.DoModal();
+
+	}
+	if (true == isPointInRect( point ,  rect2)){
+		CSecondDlg dlg;
+		mynum = 2000;
+		dlg.fromwherenum = mynum+fromwherenum;
+		dlg.DoModal();
+
+	}
+	if (true == isPointInRect( point ,  rect3)){
+		CSecondDlg dlg;
+		mynum = 3000;
+		dlg.fromwherenum = mynum+fromwherenum;
+		dlg.DoModal();
+
+	}
+	if (true == isPointInRect( point ,  rect4)){
+		CSecondDlg dlg;
+		mynum = 4000;
+		dlg.fromwherenum = mynum+fromwherenum;
 		dlg.DoModal();
 
 	}

@@ -28,4 +28,5 @@ public:
 	CString m_username;
 	CString m_password;
 	
+	afx_msg void OnBnClickedCancel();
 };

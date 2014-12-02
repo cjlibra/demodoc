@@ -7,6 +7,9 @@
 #include "afxdialogex.h"
 
 
+#include "ContentListDlg.h"
+
+
 // CThirdoneDlg 对话框
 
 IMPLEMENT_DYNAMIC(CThirdoneDlg, CDialogEx)
@@ -37,6 +40,14 @@ BOOL CThirdoneDlg::OnInitDialog()
 
 	CEdit *editp =(CEdit *) GetDlgItem(IDC_EDIT1);
 	editp->MoveWindow( rect.left*xScale,rect.top*yScale, (rect.right-rect.left)*xScale,(rect.bottom-rect.top)*yScale );
+	LOGFONT lf;     
+      
+	memset(&lf,0,sizeof(lf));   
+	lf.lfHeight = 35;  //改变大小  
+	font.CreateFontIndirect(&lf) ;	
+	editp->SetFont(&font,TRUE);
+	
+	
 	CDialogEx::OnInitDialog();
 	return TRUE; 
 }
@@ -59,6 +70,18 @@ void CThirdoneDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	CRect rect4(1694,460,1893,520);//tuisouye
 	CRect rect5(1135,171,1318,239);//sousuoanniu
 
+	if (true == isPointInRect( point ,  rect1)){
+		 CContentListDlg dlg;
+		 mynum=1;
+		 dlg.totaltypenum=mynum+fromwherenum;
+		 dlg.DoModal();
+	}
+	if (true == isPointInRect( point ,  rect2)){
+		 CContentListDlg dlg;
+		 mynum=2;
+		 dlg.totaltypenum=mynum+fromwherenum;
+		 dlg.DoModal();
+	}
 	if (true == isPointInRect( point ,  rect3)){
 		CDialogEx::OnCancel();
 

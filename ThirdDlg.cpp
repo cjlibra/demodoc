@@ -8,6 +8,7 @@
 
 
 #include "ThirdoneDlg.h"
+#include "ContentListDlg.h"
 
 
 // CThirdDlg 对话框
@@ -40,6 +41,15 @@ BOOL CThirdDlg::OnInitDialog()
 
 	CEdit *editp =(CEdit *) GetDlgItem(IDC_EDIT1);
 	editp->MoveWindow( rect.left*xScale,rect.top*yScale, (rect.right-rect.left)*xScale,(rect.bottom-rect.top)*yScale );
+	LOGFONT lf;     
+    
+	memset(&lf,0,sizeof(lf));   
+	lf.lfHeight = 35;  //改变大小  
+	font.CreateFontIndirect(&lf) ;	
+	editp->SetFont(&font,TRUE);
+	
+	
+	
 	CDialogEx::OnInitDialog();
 	return TRUE; 
 }
@@ -63,16 +73,65 @@ void CThirdDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	CRect rect5(1455,458,1680,518);//fantuichu
 	CRect rect6(1693,460,1892,521);//tuishouye
 	CRect rect7(1130,170,1311,233);//sousuoanniu
-	if (true == isPointInRect( point ,  rect6)){
-		CThirdoneDlg dlg;
-		dlg.DoModal();
+	if (true == isPointInRect( point ,  rect1)){
+		if (true == this->isFromGongsi(fromwherenum)){
+			CThirdoneDlg dlg;
+			mynum = 10;
+			dlg.fromwherenum = mynum+fromwherenum;
+			dlg.DoModal();
+		}else{
+			 CContentListDlg dlg;
+		     mynum=10;
+		     dlg.totaltypenum=mynum+fromwherenum;
+		     dlg.DoModal();
+		}
 	}
+	if (true == isPointInRect( point ,  rect2)){
+		if (true == this->isFromGongsi(fromwherenum)){
+			CThirdoneDlg dlg;
+			mynum = 20;
+			dlg.fromwherenum = mynum+fromwherenum;
+			dlg.DoModal();
+		}else{
+			 CContentListDlg dlg;
+		     mynum=20;
+		     dlg.totaltypenum=mynum+fromwherenum;
+		     dlg.DoModal();
+		}
+	}
+	if (true == isPointInRect( point ,  rect3)){
+		if (true == this->isFromGongsi(fromwherenum)){
+			CThirdoneDlg dlg;
+			mynum = 30;
+			dlg.fromwherenum = mynum+fromwherenum;
+			dlg.DoModal();
+		}else{
+			 CContentListDlg dlg;
+		     mynum=30;
+		     dlg.totaltypenum=mynum+fromwherenum;
+		     dlg.DoModal();
+		}
+	}
+	if (true == isPointInRect( point ,  rect4)){
+		if (true == this->isFromGongsi(fromwherenum)){
+			CThirdoneDlg dlg;
+			mynum = 40;
+			dlg.fromwherenum = mynum+fromwherenum;
+			dlg.DoModal();
+		}else{
+			 CContentListDlg dlg;
+		     mynum=40;
+		     dlg.totaltypenum=mynum+fromwherenum;
+		     dlg.DoModal();
+		}
+	}
+	
 
-	if (true == isPointInRect( point ,  rect6)){
+	if (true == isPointInRect( point ,  rect5)){
 		CDialogEx::OnCancel();
 
 	}
-	if (true == isPointInRect( point ,  rect5)){
+	if (true == isPointInRect( point ,  rect6)){
 		CDialogEx::OnCancel();
 
 	}
@@ -133,4 +192,19 @@ bool CThirdDlg::isPointInRect(CPoint point ,CRect rect)
 		return true;
 	}
 	return false;
+}
+
+
+bool CThirdDlg::isFromGongsi(int typenum)
+{
+	int tmp1;
+	tmp1=typenum/1000;
+	int tmp2;
+	tmp2 = tmp1 % 10;
+	if (tmp2 == 1) return true;
+
+	return false;
+
+
+
 }

@@ -27,4 +27,8 @@ public:
 	float xScale;
 	float yScale;
 	CString imgfile;
+	int mynum;
+	int fromwherenum;
+	bool isFromGongsi(int typenum);
+	CFont   font;  
 };

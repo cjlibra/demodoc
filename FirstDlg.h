@@ -25,7 +25,9 @@ public:
 	CString imgfile;
 	afx_msg void OnPaint();
 	bool isPointInRect(CPoint point ,CRect rect);
-
+	CFont   font; 
 	float xScale;
 	float yScale;
+	int mynum;
+	int fromwherenum;
 };
