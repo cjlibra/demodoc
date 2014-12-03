@@ -69,7 +69,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -134,6 +134,7 @@
     <None Include="res\button\zz.bmp" />
     <None Include="res\demodoc.ico" />
     <None Include="res\demodoc.rc2" />
+    <None Include="res\exit.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddinfoDlg.h" />
@@ -147,6 +148,8 @@
     <ClInclude Include="LoginDlg.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="ManageDlg.h" />
+    <ClInclude Include="pdf1.h" />
+    <ClInclude Include="PdfViewDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SecondDlg.h" />
     <ClInclude Include="sqlite3.h" />
@@ -167,6 +170,8 @@
     <ClCompile Include="LoginDlg.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="ManageDlg.cpp" />
+    <ClCompile Include="pdf1.cpp" />
+    <ClCompile Include="PdfViewDlg.cpp" />
     <ClCompile Include="SecondDlg.cpp" />
     <ClCompile Include="sqlite3.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -187,7 +192,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="demodoc.rc" />
+      <UserProperties RESOURCE_FILE="demodoc.rc" _x007B_CA8A9780-280D-11CF-A24D-444553540000_x007D_="CPdf1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

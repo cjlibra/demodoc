@@ -133,6 +133,9 @@
     <None Include="res\button\zz.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\exit.bmp">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demodoc.h">
@@ -189,6 +192,12 @@
     <ClInclude Include="FileListDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PdfViewDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pdf1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="demodoc.cpp">
@@ -237,6 +246,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="FileListDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PdfViewDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pdf1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

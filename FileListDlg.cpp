@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 
 #include "DirListCtrlDlg.h"
+#include "PdfViewDlg.h"
 // CFileListDlg 对话框
 
 IMPLEMENT_DYNAMIC(CFileListDlg, CDialogEx)
@@ -33,7 +34,7 @@ BOOL CFileListDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	
+	 
 	ShowWindow(SW_MAXIMIZE);
 	imgfile = _T("res\\4.jpg");
 	Show_picture(imgfile);
@@ -133,7 +134,11 @@ void CFileListDlg::OnBnClickedButton2()
 	CString str;
 	this->m_filelistctrl.GetText(isel,str);
 	CString pdffile = nowdir+"\\"+str+".pdf";
-	::ShellExecute(this->m_hWnd,"open",pdffile,"","",SW_SHOW);
+	//::ShellExecute(this->m_hWnd,"open",pdffile,"","",SW_SHOW);
+	CPdfViewDlg dlg1;
+	dlg1.m_pdfname = pdffile;
+	dlg1.DoModal();
+	
 }
 
 
@@ -177,6 +182,8 @@ void CFileListDlg::OnPaint()
 	// TODO: 在此处添加消息处理程序代码
 	// 不为绘图消息调用 CDialogEx::OnPaint()
 	Show_picture(imgfile);
+	m_filelistctrl.ShowWindow(1);
+	CDialogEx::OnPaint();
 }
 
 

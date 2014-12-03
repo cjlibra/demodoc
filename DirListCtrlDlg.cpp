@@ -68,7 +68,7 @@ BOOL CDirListCtrlDlg::OnInitDialog()
 	}
 	if (flagfile == 1){ 
 		dlg.DoModal();
-		this->OnCancel();
+		CDialogEx::OnCancel();
 		return TRUE;
 
 	}
@@ -101,7 +101,7 @@ BOOL CDirListCtrlDlg::OnInitDialog()
 		rect1.bottom = rect.top+150;
 		 
 		//bt->Create(titlebutton[i],WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,rect1,this,IDC_BUTTON1);
-		bt->Create(NULL,WS_CHILD|WS_VISIBLE|BS_OWNERDRAW,rect1,this,IDC_BUTTON1);
+		bt->Create(titlebutton[i],WS_CHILD|WS_VISIBLE|BS_OWNERDRAW,rect1,this,IDC_BUTTON1);
 		//bt->LoadBitmaps(IDB_BEIAN);
 		SwitchBmp(titlebutton[i],bt);
 		//bbt.Create(NULL,WS_CHILD|WS_VISIBLE|BS_OWNERDRAW,rect1,this,IDC_BUTTON1);
@@ -181,7 +181,7 @@ void CDirListCtrlDlg::SwitchBmp(CString str  ,CBitmapButton *pBton)
 	}
 	if (str == "其他") 
 	{
-		pBton->LoadBitmaps(IDB_BITMAP18);
+		pBton->LoadBitmaps(IDB_BITMAP25);
 		return;
 	}
 	if (str == "清算组") 
@@ -221,7 +221,7 @@ void CDirListCtrlDlg::SwitchBmp(CString str  ,CBitmapButton *pBton)
 	}
 	if (str == "其他") 
 	{
-		pBton->LoadBitmaps(IDB_BITMAP25);
+		pBton->LoadBitmaps(IDB_BITMAP18);
 		return;
 	}
 	if (str == "样张") 
