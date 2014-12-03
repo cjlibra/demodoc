@@ -229,7 +229,7 @@ void CDirListCtrlDlg::SwitchBmp(CString str  ,CBitmapButton *pBton)
 		pBton->LoadBitmaps(IDB_BITMAP26);
 		return;
 	}
-	if (str == "一人有限公司变合资有限公司") 
+	if (str == "一人") 
 	{
 		pBton->LoadBitmaps(IDB_BITMAP27);
 		return;
@@ -294,7 +294,7 @@ void CDirListCtrlDlg::SwitchBmp(CString str  ,CBitmapButton *pBton)
 		pBton->LoadBitmaps(IDB_HEHUOQIYE);
 		return;
 	}
-	if (str == "合资有限公司变一人有限公司") 
+	if (str == "合资") 
 	{
 		pBton->LoadBitmaps(IDB_HEYIGONGSI);
 		return;
