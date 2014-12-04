@@ -102,7 +102,7 @@ void CMainDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		dlg.DoModal();		
 		*/
 		CDirListCtrlDlg dlg;
-		dlg.currdir = "黄埔自助服务材料\\名称登记";
+		dlg.currdir = "市场监督管理局\\名称登记";
 		dlg.DoModal();	
 	}
 	if (true == isPointInRect(point,rect3)){
@@ -113,7 +113,7 @@ void CMainDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		dlg.DoModal();		
 		*/
 		CDirListCtrlDlg dlg;
-		dlg.currdir = "黄埔自助服务材料\\内资登记";
+		dlg.currdir = "市场监督管理局\\内资登记";
 		dlg.DoModal();	
 	}
 	if (true == isPointInRect(point,rect4)){
@@ -124,7 +124,7 @@ void CMainDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		dlg.DoModal();		
 		*/
 		CDirListCtrlDlg dlg;
-		dlg.currdir = "黄埔自助服务材料\\外资登记";
+		dlg.currdir = "市场监督管理局\\外资登记";
 		dlg.DoModal();	
 	}
 	if (true == isPointInRect(point,rect5)){
@@ -133,12 +133,13 @@ void CMainDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		//dlg.fromwherenum = mynum;
 		//dlg.DoModal();		
 	//	AfxMessageBox("没有搜索到所需的文件");
+		return;
 		UpdateData(TRUE);
 		CString str;
 		CEdit *editp =(CEdit *) GetDlgItem(IDC_EDIT1);
 		str = this->m_editsearchtxt;
 		this->m_editsearchctrl.GetWindowText(this->m_editsearchtxt);
-		SearchDir("黄埔自助服务材料\\",&str);
+		SearchDir("市场监督管理局\\",&str);
 	//	AfxMessageBox( searchdir+str);;
 		CFileListDlg dlg;
 		dlg.nowdir = searchdir;

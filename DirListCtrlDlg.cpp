@@ -289,6 +289,17 @@ void CDirListCtrlDlg::SwitchBmp(CString str  ,CBitmapButton *pBton)
 		pBton->LoadBitmaps(IDB_BITMAP9);
 		return;
 	}
+		if (str == "范本") 
+	{
+		pBton->LoadBitmaps(IDB_BITMAP9);
+		return;
+	}
+	if (str == "材料") 
+	{
+		pBton->LoadBitmaps(IDB_BITMAP10);
+		return;
+	}
+	
 	if (str == "合伙企业") 
 	{
 		pBton->LoadBitmaps(IDB_HEHUOQIYE);

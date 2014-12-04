@@ -39,12 +39,12 @@ BOOL CFileListDlg::OnInitDialog()
 	imgfile = _T("res\\4.jpg");
 	Show_picture(imgfile);
 
-	CRect rect1(50,246,1342,837);
+	CRect rect1(50,246,1804,699);//file list
 	CRect rect2(rect1.left*xScale,rect1.top*yScale,rect1.right*xScale,rect1.bottom*yScale);
 
-	CRect rect3(1380,342,1535,401);
+	CRect rect3(807,736,910,834); //xia zai anniu
 	CRect rect3_1(rect3.left*xScale,rect3.top*yScale,rect3.right*xScale,rect3.bottom*yScale);
-	CRect rect3_2(rect3_1.left,rect3_1.top+200,rect3_1.right,rect3_1.bottom+200);
+	CRect rect3_2(rect3_1.left+150,rect3_1.top,rect3_1.right+150,rect3_1.bottom);
 	this->m_filelistctrl.MoveWindow(rect2);
 	//bbt.SubclassDlgItem(IDC_BUTTON1,this);
 		//bbt.AutoLoad(IDR_IDB_AAA_UP1,this);

@@ -136,6 +136,12 @@
     <None Include="res\exit.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\button\cailiao.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\button\ky.bmp">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demodoc.h">
