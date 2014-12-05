@@ -14,6 +14,7 @@ IMPLEMENT_DYNAMIC(CFileListDlg, CDialogEx)
 
 CFileListDlg::CFileListDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CFileListDlg::IDD, pParent)
+	, m_stitle(_T(""))
 {
 
 }
@@ -25,20 +26,21 @@ CFileListDlg::~CFileListDlg()
 void CFileListDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, m_filelistctrl);
+	DDX_Control(pDX, IDC_LIST2, m_filelistctrl);
 	DDX_Control(pDX, IDC_BUTTON1, m_copybton);
 	DDX_Control(pDX, IDC_BUTTON2, m_viewbton);
 	DDX_Control(pDX, IDC_EDIT1, m_edittitlectrl);
+	DDX_Text(pDX, IDC_STATICTITLE, m_stitle);
 }
 BOOL CFileListDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	 
-	ShowWindow(SW_MAXIMIZE);
-	imgfile = _T("res\\4.jpg");
+	 ShowWindow(SW_MAXIMIZE);
+	
+	imgfile = _T("res\\6.jpg");
 	Show_picture(imgfile);
-
+	
 	CRect rect1(50,246,1804,699);//file list
 	CRect rect2(rect1.left*xScale,rect1.top*yScale,rect1.right*xScale,rect1.bottom*yScale);
 
@@ -46,6 +48,21 @@ BOOL CFileListDlg::OnInitDialog()
 	CRect rect3_1(rect3.left*xScale,rect3.top*yScale,rect3.right*xScale,rect3.bottom*yScale);
 	CRect rect3_2(rect3_1.left+150,rect3_1.top,rect3_1.right+150,rect3_1.bottom);
 	this->m_filelistctrl.MoveWindow(rect2);
+
+
+	CRect rect4(530,338,1398,399); //表单tiitle
+	CRect rect4_1(rect4.left*xScale,rect4.top*yScale,rect4.right*xScale,rect4.bottom*yScale);
+	m_stitle = this->currdir+"材料清单";
+
+	CRect rect5(111,445,1799,1517);//文件列表的
+	CRect rect5_1(rect5.left*xScale,rect5.top*yScale,rect5.right*xScale,rect5.bottom*yScale);
+	m_filelistctrl.MoveWindow(rect5_1);
+	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER,50);
+	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,600);
+	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,200);
+	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,200);
+
+
 	//bbt.SubclassDlgItem(IDC_BUTTON1,this);
 		//bbt.AutoLoad(IDR_IDB_AAA_UP1,this);
 		//bt->LoadBitmaps(IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1);
@@ -84,18 +101,26 @@ BOOL CFileListDlg::OnInitDialog()
      }
 	lf.lfHeight = 30;  //改变大小  
 	font.CreateFontIndirect(&lf) ;	
-	this->m_filelistctrl.SetFont(&font,TRUE);
-	int n = this->m_filelistctrl.GetItemHeight(0);
+	CString subfilename[4];
+	//this->m_filelistctrl.SetFont(&font,TRUE);
+//	int n = this->m_filelistctrl.GetItemHeight(0);
 	for (int i=0;i<this->filecount;i++){
 		CString tmpstr=	this->filelistname[i];
-		if (tmpstr.Right(4) == ".doc"){
-			int iIndex = tmpstr.ReverseFind('.');			
-			this->m_filelistctrl.SetItemHeight(iIndex,n+11);
-		    this->m_filelistctrl.AddString(tmpstr.Left(iIndex));
-		}
+		tmpstr.Replace("."," ");
+		AfxExtractSubString(subfilename[0], (LPCTSTR)tmpstr, 0, ' ');
+		AfxExtractSubString(subfilename[1], (LPCTSTR)tmpstr, 1, ' ');
+		AfxExtractSubString(subfilename[2], (LPCTSTR)tmpstr, 2, ' ');
+		AfxExtractSubString(subfilename[3], (LPCTSTR)tmpstr, 3, ' ');
+//		this->m_filelistctrl.SetItemHeight(i,n+11);
+		this->m_filelistctrl.InsertItem(i,subfilename[0]);
+		this->m_filelistctrl.SetItemText(i,1,subfilename[1]);
+		this->m_filelistctrl.SetItemText(i,2,subfilename[2]);
+		this->m_filelistctrl.SetItemText(i,3,subfilename[3]);
+		
+		
 	}
 
-	CRect rect_1(34,159,1255,202);
+	CRect rect_1(34,159,1255,202); //抬头，显示目录结构
 	this->m_edittitlectrl.MoveWindow(rect_1.left*xScale,rect_1.top*yScale,rect_1.right*xScale,rect_1.bottom*yScale);;
 	//this->m_edittitlectrl.SetWindowTextA(this->nowdir);
 	CString tmp1 = this->nowdir;
@@ -124,7 +149,7 @@ void CFileListDlg::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	int isel;
-	isel = this->m_filelistctrl.GetCurSel();
+//	isel = this->m_filelistctrl.GetCurSel();
  
 	 
 	if (isel < 0) {
@@ -132,7 +157,7 @@ void CFileListDlg::OnBnClickedButton2()
 		return;
 	}
 	CString str;
-	this->m_filelistctrl.GetText(isel,str);
+//	this->m_filelistctrl.GetText(isel,str);
 	CString pdffile = nowdir+"\\"+str+".pdf";
 	//::ShellExecute(this->m_hWnd,"open",pdffile,"","",SW_SHOW);
 	CPdfViewDlg dlg1;
@@ -238,9 +263,9 @@ void CFileListDlg::OnLbnSelchangeList1()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	int isel;
-	isel = this->m_filelistctrl.GetCurSel();
+//	isel = this->m_filelistctrl.GetCurSel();
 	CString str;
-	this->m_filelistctrl.GetText(isel,str);
+//	this->m_filelistctrl.GetText(isel,str);
 	CFile file;
 	CString currentdir = this->nowdir;
 	if(file.Open(currentdir+"\\"+str+".pdf",CFile::modeRead)){
@@ -267,12 +292,12 @@ void CFileListDlg::OnBnClickedButton1()
 	CString selfilename;
 	CString uDisk;
 	int isel;
-	isel = this->m_filelistctrl.GetCurSel();
+//	isel = this->m_filelistctrl.GetCurSel();
 	if (isel < 0) {
 		AfxMessageBox("请选择文件");
 		return;
 	}
-	 this->m_filelistctrl.GetText(isel,selfilename);
+//	 this->m_filelistctrl.GetText(isel,selfilename);
 	 AfxMessageBox("请插入U盘后点确定按钮");
 	 UINT DiskType;  
 	size_t   szAllDriveStrings   =   GetLogicalDriveStrings(0,NULL);     

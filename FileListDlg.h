@@ -21,7 +21,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CListBox m_filelistctrl;
+	CListCtrl m_filelistctrl;
 	afx_msg void OnBnClickedButton2();
 	CBitmap  bitmap;
 	CBitmapButton m_copybton;
@@ -43,4 +43,5 @@ public:
 	int dontflag;
 	CEdit m_edittitlectrl;
 	CString currdir;
+	CString m_stitle;
 };
