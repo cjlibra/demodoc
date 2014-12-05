@@ -31,6 +31,8 @@ void CFileListDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON2, m_viewbton);
 	DDX_Control(pDX, IDC_EDIT1, m_edittitlectrl);
 	DDX_Text(pDX, IDC_STATICTITLE, m_stitle);
+	DDX_Control(pDX, IDC_STATICTITLE, m_stitlectrl);
+	DDX_Control(pDX, IDC_EDIT3, m_txtsctrl);
 }
 BOOL CFileListDlg::OnInitDialog()
 {
@@ -52,17 +54,34 @@ BOOL CFileListDlg::OnInitDialog()
 
 	CRect rect4(530,338,1398,399); //表单tiitle
 	CRect rect4_1(rect4.left*xScale,rect4.top*yScale,rect4.right*xScale,rect4.bottom*yScale);
-	m_stitle = this->currdir+"材料清单";
+	m_stitle = this->nowdir+"材料清单";
+	int n = m_stitle.ReverseFind('\\');
+	this->m_stitlectrl.MoveWindow(rect4_1);
+	this->m_stitlectrl.SetWindowText(m_stitle.Right(m_stitle.GetLength()-n-1));
 
 	CRect rect5(111,445,1799,1517);//文件列表的
 	CRect rect5_1(rect5.left*xScale,rect5.top*yScale,rect5.right*xScale,rect5.bottom*yScale);
 	m_filelistctrl.MoveWindow(rect5_1);
-	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER,50);
-	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,600);
+	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER,100);
+	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,700);
 	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,200);
 	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,200);
 
+	CRect rect6(109,1556,1824,2127);
+	CRect rect6_1(rect6.left*xScale,rect6.top*yScale,rect6.right*xScale,rect6.bottom*yScale);
+	this->m_txtsctrl.MoveWindow(rect6_1);
+	CFile file;
+	if(file.Open( this->nowdir+"\\"+"提交材料说明.txt",CFile::modeRead ,NULL)) {
+		char *readbuf;
+		int nNum = file.GetLength()+1;
+		readbuf = new char [nNum ];
+		memset(readbuf,0,nNum);
+		file.Read(readbuf,nNum);
+		this->m_txtsctrl.SetWindowText(readbuf);
+		file.Close();
+		delete readbuf;
 
+	}
 	//bbt.SubclassDlgItem(IDC_BUTTON1,this);
 		//bbt.AutoLoad(IDR_IDB_AAA_UP1,this);
 		//bt->LoadBitmaps(IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1,IDR_IDB_AAA_UP1);
@@ -75,18 +94,21 @@ BOOL CFileListDlg::OnInitDialog()
 	//this->m_copybton.SizeToContent();
 	//bool ret = bitmap.LoadBitmap(MAKEINTRESOURCE(IDR_IDB_AAA_UP1));
     //this->m_copybton.SetBitmap((HBITMAP)bitmap);
-
-	this->m_copybton.MoveWindow(rect3_1);
+	CRect rect_b;
+	m_filelistctrl.GetSubItemRect(1,3,LVIR_BOUNDS,rect_b);
+	m_filelistctrl.ClientToScreen(rect_b);
+	this->m_copybton.MoveWindow(rect_b);
+	//this->m_copybton.MoveWindow(rect3_1);
 	this->m_viewbton.MoveWindow(rect3_2);
 
 	//HBITMAP hBitmap1 = ::LoadBitmap(::AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_DOWNLOAD1));
 	this->m_copybton.LoadBitmaps( MAKEINTRESOURCE(IDB_DOWNLOAD1));
-	this->m_copybton.SizeToContent();
+//	this->m_copybton.SizeToContent();
 	//this->m_copybton.SetBitmap(hBitmap1);
 	//HBITMAP hBitmap2 = ::LoadBitmap(::AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_VIEWPDF1));
 	//this->m_viewbton.SetBitmap(hBitmap2);
 	this->m_viewbton.LoadBitmaps( MAKEINTRESOURCE(IDB_VIEWPDF1));
-	this->m_viewbton.SizeToContent();
+	//this->m_viewbton.SizeToContent();
 
 	LOGFONT lf;     
        
@@ -104,19 +126,21 @@ BOOL CFileListDlg::OnInitDialog()
 	CString subfilename[4];
 	//this->m_filelistctrl.SetFont(&font,TRUE);
 //	int n = this->m_filelistctrl.GetItemHeight(0);
+	
 	for (int i=0;i<this->filecount;i++){
 		CString tmpstr=	this->filelistname[i];
-		tmpstr.Replace("."," ");
-		AfxExtractSubString(subfilename[0], (LPCTSTR)tmpstr, 0, ' ');
-		AfxExtractSubString(subfilename[1], (LPCTSTR)tmpstr, 1, ' ');
-		AfxExtractSubString(subfilename[2], (LPCTSTR)tmpstr, 2, ' ');
-		AfxExtractSubString(subfilename[3], (LPCTSTR)tmpstr, 3, ' ');
-//		this->m_filelistctrl.SetItemHeight(i,n+11);
-		this->m_filelistctrl.InsertItem(i,subfilename[0]);
-		this->m_filelistctrl.SetItemText(i,1,subfilename[1]);
-		this->m_filelistctrl.SetItemText(i,2,subfilename[2]);
-		this->m_filelistctrl.SetItemText(i,3,subfilename[3]);
-		
+		if (tmpstr.Right(4) == ".set"){
+			tmpstr.Replace("."," ");
+			AfxExtractSubString(subfilename[0], (LPCTSTR)tmpstr, 0, ' ');
+			AfxExtractSubString(subfilename[1], (LPCTSTR)tmpstr, 1, ' ');
+			AfxExtractSubString(subfilename[2], (LPCTSTR)tmpstr, 2, ' ');
+			AfxExtractSubString(subfilename[3], (LPCTSTR)tmpstr, 3, ' ');
+	//		this->m_filelistctrl.SetItemHeight(i,n+11);
+			this->m_filelistctrl.InsertItem(i,subfilename[0]);
+			this->m_filelistctrl.SetItemText(i,1,subfilename[1]);
+			this->m_filelistctrl.SetItemText(i,2,subfilename[2]);
+			this->m_filelistctrl.SetItemText(i,3,subfilename[3]);
+		}
 		
 	}
 
@@ -128,6 +152,11 @@ BOOL CFileListDlg::OnInitDialog()
 	//this->m_edittitlectrl.SetFont(&font);
 	//this->m_edittitlectrl.SetReadOnly();
 	this->SetDlgItemText(IDC_EDIT1,tmp1);
+
+
+	this->m_copybton.MoveWindow(rect_b);
+	this->m_copybton.ShowWindow(1);
+
 	return TRUE; 
 
 }

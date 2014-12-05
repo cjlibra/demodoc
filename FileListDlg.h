@@ -44,4 +44,6 @@ public:
 	CEdit m_edittitlectrl;
 	CString currdir;
 	CString m_stitle;
+	CEdit m_stitlectrl;
+	CEdit m_txtsctrl;
 };
