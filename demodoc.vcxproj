@@ -145,6 +145,7 @@
     <ClInclude Include="demodoc.h" />
     <ClInclude Include="demodocDlg.h" />
     <ClInclude Include="DirListCtrlDlg.h" />
+    <ClInclude Include="Dlgdlg.h" />
     <ClInclude Include="FileListDlg.h" />
     <ClInclude Include="FirstDlg.h" />
     <ClInclude Include="LoginDlg.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="demodoc.cpp" />
     <ClCompile Include="demodocDlg.cpp" />
     <ClCompile Include="DirListCtrlDlg.cpp" />
+    <ClCompile Include="Dlgdlg.cpp" />
     <ClCompile Include="FileListDlg.cpp" />
     <ClCompile Include="FirstDlg.cpp" />
     <ClCompile Include="LoginDlg.cpp" />

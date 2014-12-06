@@ -24,8 +24,8 @@ public:
 	CListCtrl m_filelistctrl;
 	afx_msg void OnBnClickedButton2();
 	CBitmap  bitmap;
-	CBitmapButton m_copybton;
-	CBitmapButton m_viewbton;
+	CButton m_copybton;
+	CButton m_viewbton;
 	afx_msg void OnPaint();
 	bool  Show_picture(CString imgPath);
 	float xScale;
@@ -46,4 +46,9 @@ public:
 	CString m_stitle;
 	CEdit m_stitlectrl;
 	CEdit m_txtsctrl;
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnLvnItemchangingList2(NMHDR *pNMHDR, LRESULT *pResult);
+	CButton *pbt1[200];
+	CButton *pbt2[200];
+	int nCount ;
 };

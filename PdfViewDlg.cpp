@@ -25,13 +25,15 @@ void CPdfViewDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
  	DDX_Control(pDX, IDC_PDF1, m_pdfviewctrl);
-	DDX_Control(pDX, IDC_BUTTON1, m_exitbutton);
+ 	DDX_Control(pDX, IDC_BUTTON1, m_exitbutton);
 }
 
 BOOL CPdfViewDlg::OnInitDialog()
 {
 
 	CDialogEx::OnInitDialog();
+
+	 
 	 
 	this->ShowWindow(SW_MAXIMIZE);
 	CRect rect;
@@ -60,5 +62,7 @@ END_MESSAGE_MAP()
 void CPdfViewDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
+//	this->m_pdfviewctrl.Detach();
+	this->m_pdfviewctrl.CloseWindow();
 	CDialogEx::OnCancel();
 }
