@@ -399,7 +399,7 @@ void CDirListCtrlDlg::OnBnClickedButton1()
 			p[i]->ShowWindow(0);
 			p[i]->EnableWindow(0);
 			p[i]->CloseWindow();
-			//delete  p[i];
+			delete  p[i];
 		 
 	}
 	prevdir =currdir;
@@ -508,7 +508,7 @@ void CDirListCtrlDlg::OnLButtonDown(UINT nFlags, CPoint point)
 				p[i]->ShowWindow(0);
 				p[i]->EnableWindow(0);
 				p[i]->CloseWindow();
-				//delete  p[i];
+				delete  p[i];
 		 
 		}
 		CRect rect(43*xScale,622*yScale,1807*xScale,835*yScale);

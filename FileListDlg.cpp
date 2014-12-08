@@ -82,11 +82,12 @@ BOOL CFileListDlg::OnInitDialog()
 
 	CRect rect5(111,445,1799,1317);//文件列表的
 	CRect rect5_1(rect5.left*xScale,rect5.top*yScale,rect5.right*xScale,rect5.bottom*yScale);
+	int widthlist = rect5.right*xScale - rect5.left*xScale;
 	m_filelistctrl.MoveWindow(rect5_1);
-	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER,100);
-	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,770);
-	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,100);
-	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,150);
+	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER, 100*widthlist/1195);
+	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,845*widthlist/1195);
+	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,100*widthlist/1195 );
+	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,150*widthlist/1195 );
 
 	CRect rect6(109,1356,1824,2127);
 	CRect rect6_1(rect6.left*xScale,rect6.top*yScale,rect6.right*xScale,rect6.bottom*yScale);
