@@ -33,6 +33,7 @@ public:
 	CString imgfile;
 	int filecount;
 	CString filelistname[200];
+	CString mygetfilename[200];
 	CString nowdir;
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	bool  isPointInRect(CPoint point ,CRect rect);
@@ -40,6 +41,9 @@ public:
 	afx_msg void OnLbnSelchangeList1();
 	afx_msg void OnBnClickedButton1();
 	CFont font;
+	CFont font1;
+	CFont font3;
+	CFont font4;
 	int dontflag;
 	CEdit m_edittitlectrl;
 	CString currdir;
@@ -51,4 +55,5 @@ public:
 	CButton *pbt1[200];
 	CButton *pbt2[200];
 	int nCount ;
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

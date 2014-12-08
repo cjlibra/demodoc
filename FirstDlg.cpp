@@ -153,7 +153,8 @@ bool CFirstDlg::Show_picture(CString imgPath)
 
 void CFirstDlg::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
+	CPaintDC dc(this); 
+	// device context for painting
 	// TODO: 在此处添加消息处理程序代码
 	// 不为绘图消息调用 CDialogEx::OnPaint()
 

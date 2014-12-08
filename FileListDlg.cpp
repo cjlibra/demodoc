@@ -50,6 +50,17 @@ BOOL CFileListDlg::OnInitDialog()
 	imgfile = _T("res\\6.jpg");
 	Show_picture(imgfile);
 	
+	LOGFONT lf;     
+       
+	memset(&lf,0,sizeof(lf));   
+	
+	//font.CreateFontIndirect(&lf) ;	
+
+	CFont* font2 = this->GetFont();  
+    if (font2){
+		font2->GetLogFont(&lf);   // 这里取得LOGFONT结构
+		 // 字体名在  lf2.lfFaceName  里。
+     }
 	//CRect rect1(50,246,1804,699);//file list
 	//CRect rect2(rect1.left*xScale,rect1.top*yScale,rect1.right*xScale,rect1.bottom*yScale);
 
@@ -65,18 +76,24 @@ BOOL CFileListDlg::OnInitDialog()
 	int n = m_stitle.ReverseFind('\\');
 	this->m_stitlectrl.MoveWindow(rect4_1);
 	this->m_stitlectrl.SetWindowText(m_stitle.Right(m_stitle.GetLength()-n-1));
+	lf.lfHeight = 35;  //改变大小  
+	font3.CreateFontIndirect(&lf);
+	m_stitlectrl.SetFont(&font3,TRUE);
 
 	CRect rect5(111,445,1799,1317);//文件列表的
 	CRect rect5_1(rect5.left*xScale,rect5.top*yScale,rect5.right*xScale,rect5.bottom*yScale);
 	m_filelistctrl.MoveWindow(rect5_1);
 	m_filelistctrl.InsertColumn(0,"序号",LVCFMT_CENTER,100);
-	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,700);
-	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,200);
-	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,200);
+	m_filelistctrl.InsertColumn(1,"提交文件",LVCFMT_CENTER,770);
+	m_filelistctrl.InsertColumn(2,"说明",LVCFMT_CENTER,100);
+	m_filelistctrl.InsertColumn(2,"操作",LVCFMT_CENTER,150);
 
 	CRect rect6(109,1356,1824,2127);
 	CRect rect6_1(rect6.left*xScale,rect6.top*yScale,rect6.right*xScale,rect6.bottom*yScale);
 	this->m_txtsctrl.MoveWindow(rect6_1);
+	lf.lfHeight = 26;  //改变大小  
+	font4.CreateFontIndirect(&lf);
+	this->m_txtsctrl.SetFont(&font4,TRUE);
 	CFile file;
 	if(file.Open( this->nowdir+"\\"+"提交材料说明.txt",CFile::modeRead ,NULL)) {
 		char *readbuf;
@@ -84,7 +101,11 @@ BOOL CFileListDlg::OnInitDialog()
 		readbuf = new char [nNum ];
 		memset(readbuf,0,nNum);
 		file.Read(readbuf,nNum);
-		this->m_txtsctrl.SetWindowText(readbuf);
+		CString sstr(readbuf);
+		for (int i=0;i<20;i++){
+			sstr += " \r\n";
+		}
+		this->m_txtsctrl.SetWindowText(sstr);
 		file.Close();
 		delete readbuf;
 
@@ -124,24 +145,19 @@ BOOL CFileListDlg::OnInitDialog()
 //	this->m_viewbton.LoadBitmaps( MAKEINTRESOURCE(IDB_VIEWPDF1));
 	//this->m_viewbton.SizeToContent();
 
-	LOGFONT lf;     
-       
-	memset(&lf,0,sizeof(lf));   
 	
-	//font.CreateFontIndirect(&lf) ;	
-
-	CFont* font2 = this->GetFont();  
-    if (font2){
-		font2->GetLogFont(&lf);   // 这里取得LOGFONT结构
-		 // 字体名在  lf2.lfFaceName  里。
-     }
-	lf.lfHeight = 20;  //改变大小  
+	lf.lfHeight = 26;  //改变大小  
 	font.CreateFontIndirect(&lf) ;	
 	CString subfilename[4];
 	this->m_filelistctrl.SetFont(&font,TRUE);
-	this->m_filelistctrl.SetExtendedStyle(LVS_EX_FULLROWSELECT );
+	this->m_filelistctrl.SetExtendedStyle(LVS_EX_FULLROWSELECT  |LVS_EX_TRACKSELECT );
+	this->m_filelistctrl.SetTextColor(RGB(39,91,210));
+
 //	int n = this->m_filelistctrl.GetItemHeight(0);
-	
+	int ntmp;
+	int nloop = 0;
+	int flaglines = 0;
+	int nlinelimit = 55;
 	for (int i=0;i<this->filecount;i++){
 		CString tmpstr=	this->filelistname[i];
 		if (tmpstr.Right(4) == ".set"){
@@ -151,9 +167,26 @@ BOOL CFileListDlg::OnInitDialog()
 			AfxExtractSubString(subfilename[2], (LPCTSTR)tmpstr, 2, ' ');
 			AfxExtractSubString(subfilename[3], (LPCTSTR)tmpstr, 3, ' ');
 	//		this->m_filelistctrl.SetItemHeight(i,n+11);
-			this->m_filelistctrl.InsertItem(i,subfilename[0]);
-			this->m_filelistctrl.SetItemText(i,1,subfilename[1]);
-			this->m_filelistctrl.SetItemText(i,2,subfilename[2]);
+			this->m_filelistctrl.InsertItem(nloop,subfilename[0]);
+			ntmp =subfilename[1].GetLength();
+			mygetfilename[nloop]= subfilename[1];
+			if ( ntmp> nlinelimit ){
+				this->m_filelistctrl.SetItemText(nloop,1,subfilename[1].Left(nlinelimit ));
+				this->m_filelistctrl.InsertItem(nloop+1,"");
+				this->m_filelistctrl.SetItemText(nloop+1,1,subfilename[1].Right(ntmp-nlinelimit ));
+				 flaglines = 1;
+			}else{
+				this->m_filelistctrl.SetItemText(nloop,1,subfilename[1]);
+				flaglines = 0;
+			}
+			this->m_filelistctrl.SetItemText(nloop,2,subfilename[2]);
+			
+			if (flaglines == 1){
+				nloop = nloop + 2;
+			}else{
+				nloop++;
+			}
+			mygetfilename[nloop-1]= subfilename[1];
 			//this->m_filelistctrl.SetItemText(i,3,subfilename[3]);
 		}
 		
@@ -164,48 +197,64 @@ BOOL CFileListDlg::OnInitDialog()
 	//bt->Create(titlebutton[i],WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,rect1,this,IDC_BUTTON1);
 	int nhang = this->m_filelistctrl.GetItemCount();
 	CRect rect_b;
+
+	lf.lfHeight = 14;  //改变大小  
+	font1.CreateFontIndirect(&lf) ;	
+	int bpointcount = 0;
 	for (int i=0;i<nhang;i++){
+		if (m_filelistctrl.GetItemText(i,0) == "") continue;
 		m_filelistctrl.GetSubItemRect(i,3,LVIR_BOUNDS,rect_b);
 		bt1 = new CButton;
 		bt2 = new CButton;
+
 		bt1 ->Create("下载",WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,rect_b,&m_filelistctrl,IDC_BUTTON1);
 		bt2 ->Create("预览",WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,rect_b,&m_filelistctrl,IDC_BUTTON2);
-		pbt1[i]=bt1;
-		pbt2[i]=bt2;
+		pbt1[bpointcount ]=bt1;
+		pbt2[bpointcount ]=bt2;
+		bpointcount ++;
 		nCount = i;
 		  
         CString str;
-	    str = m_filelistctrl.GetItemText(i,1);
-						 
+	  //  str = m_filelistctrl.GetItemText(i,1);
+		str = mygetfilename[i] 	;	 
     
 		CFile file;
 		CString currentdir = this->nowdir;
 		if(file.Open(currentdir+"\\"+str+".pdf",CFile::modeRead)){
 			bt2->EnableWindow(1);
+			bt2->ShowWindow(1);
 			file.Close();
 		}else{ 
 			bt2->EnableWindow(0);
+			bt2->ShowWindow(SW_HIDE);
 		}
 	 
 		if(file.Open(currentdir+"\\"+str+".doc",CFile::modeRead)){
 			bt1->EnableWindow(1);
+			bt1->ShowWindow(1);
 			file.Close();
 		}else{ 
 			bt1->EnableWindow(0);
+			bt1->ShowWindow(SW_HIDE);
 		}
 
 		CRect rect_b;
 		m_filelistctrl.GetSubItemRect(i,3,LVIR_BOUNDS,rect_b);
 		//m_filelistctrl.ClientToScreen(rect_b);
 		//this->m_copybton.SetParent(&m_filelistctrl);
+
+		
+	 
+	    bt1->SetFont(&font1,TRUE);
 		CRect rect_b1(rect_b.left,rect_b.top+1,rect_b.right-(rect_b.right-rect_b.left)/2-5, rect_b.bottom-1);
 		bt1->MoveWindow(rect_b1);
-		bt1->ShowWindow(1);
+	//	bt1->ShowWindow(1);
 
 		//this->m_viewbton.SetParent(&m_filelistctrl);
+		bt2->SetFont(&font1,TRUE);
 		CRect rect_b2(rect_b.left+(rect_b.right-rect_b.left)/2+5,rect_b.top+1,rect_b.right, rect_b.bottom-1);
 		bt2->MoveWindow(rect_b2);
-		bt2->ShowWindow(1);
+	//	bt2->ShowWindow(1);
 
 	}
 	
@@ -235,6 +284,7 @@ BEGIN_MESSAGE_MAP(CFileListDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CFileListDlg::OnBnClickedButton1)
 	
 	ON_NOTIFY(LVN_ITEMCHANGING, IDC_LIST2, &CFileListDlg::OnLvnItemchangingList2)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -244,6 +294,7 @@ END_MESSAGE_MAP()
 void CFileListDlg::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	 
 	int isel;
 	isel = this->m_filelistctrl.GetSelectedCount();;
  
@@ -266,11 +317,33 @@ void CFileListDlg::OnBnClickedButton2()
 	   {
 		  int nItem = this->m_filelistctrl.GetNextSelectedItem(pos);
 		  str =  this->m_filelistctrl.GetItemText(nItem,1);
+		  str = mygetfilename[nItem];
 		   
 		  
 	   }
 	}
+	 
+	/*
+	CString str;
+	const MSG* pMsg= GetCurrentMessage();
+	int i=0;
+	int linesnum = this->m_filelistctrl.GetItemCount();
+	int buttoncount = 0;
+	for (i;i<linesnum;i++){
+		if (this->m_filelistctrl.GetItemText(i,0) != ""){
+		   buttoncount++;
+		}
+	}
 	
+	for (i=0;i< buttoncount;i++){
+		if (HWND(pMsg->lParam) == pbt2[i]->m_hWnd){
+			str = mygetfilename[i];
+			break;
+			 
+
+		}
+
+	}*/
 	 
 	CString pdffile = nowdir+"\\"+str+".pdf";
 	//::ShellExecute(this->m_hWnd,"open",pdffile,"","",SW_SHOW);
@@ -390,6 +463,7 @@ void CFileListDlg::OnBnClickedButton1()
 	CString currentdir = this->nowdir;
 	CString selfilename;
 	CString uDisk;
+	 
 	int isel;
 	isel = this->m_filelistctrl.GetSelectedCount();
 	if (isel <= 0) {
@@ -409,10 +483,23 @@ void CFileListDlg::OnBnClickedButton1()
 	   {
 		  int nItem = this->m_filelistctrl.GetNextSelectedItem(pos);
 		  selfilename =  this->m_filelistctrl.GetItemText(nItem,1);
-		   
+		  selfilename = mygetfilename[nItem];
 		  
 	   }
-	}
+	} 
+	/*
+	const MSG* pMsg= GetCurrentMessage();
+	int i=0;
+	int buttoncount = this->m_filelistctrl.GetItemCount();
+	for (i;i< buttoncount;i++){
+		if (HWND(pMsg->lParam) == pbt1[i]->m_hWnd){
+			selfilename  = mygetfilename[i];
+			break;
+			 
+
+		}
+
+	}*/
 	 AfxMessageBox("请插入U盘后点确定按钮");
 	 UINT DiskType;  
 	size_t   szAllDriveStrings   =   GetLogicalDriveStrings(0,NULL);     
@@ -486,6 +573,8 @@ void CFileListDlg::OnLvnItemchangingList2(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
 	*pResult = 0;
+
+
 	return;
 	 
 	 NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
@@ -494,6 +583,10 @@ void CFileListDlg::OnLvnItemchangingList2(NMHDR *pNMHDR, LRESULT *pResult)
         if(pNMListView->uNewState)
         {
                int nIndex = pNMListView->iItem;
+			   m_filelistctrl.SetSelectionMark(2);
+			   	UINT flag = LVIS_SELECTED|LVIS_FOCUSED;
+                m_filelistctrl.SetItemState(2, flag, flag);
+				return;
                CString str;
 			   str = m_filelistctrl.GetItemText(nIndex,1);
 						 
@@ -529,4 +622,33 @@ void CFileListDlg::OnLvnItemchangingList2(NMHDR *pNMHDR, LRESULT *pResult)
 		}
      }
 	*pResult = 0;
+}
+
+
+HBRUSH CFileListDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+	//return hbr;
+	if(pWnd   ==   &m_stitlectrl) {
+	     //   pDC->SetBkMode(TRANSPARENT);  
+            pDC->SetTextColor(RGB(255,0,0));  
+            HBRUSH     newHbr   =   CreateSolidBrush(GetSysColor(COLOR_BTNFACE));  
+            //   TODO:   Return   a   different   brush   if   the   default   is   not   desired  
+            return   newHbr;  
+	
+	}
+	if(pWnd   ==   &m_txtsctrl || pWnd   ==   &m_filelistctrl){  
+            //pDC->SetBkMode(TRANSPARENT);  
+		   // pDC->SetBkColor(RGB(0, 255, 255));
+            pDC->SetTextColor(RGB(39,91,210));  
+            HBRUSH     newHbr   =   CreateSolidBrush(GetSysColor(COLOR_BTNFACE));  
+            //   TODO:   Return   a   different   brush   if   the   default   is   not   desired  
+            return   newHbr;  
+    }  
+          return   hbr;  
+
+	// TODO:  在此更改 DC 的任何特性
+
+	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
+	return hbr;
 }
