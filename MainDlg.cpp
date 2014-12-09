@@ -12,7 +12,7 @@
 #include "DirListCtrlDlg.h"
 #include "FileListDlg.h"
  
-
+#include "StartServer.h"
 
 // CMainDlg ¶Ô»°¿ò
 
@@ -39,6 +39,17 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 BOOL CMainDlg::OnInitDialog()
 {
 	//SipShowIM(SIPF_ON);
+	CStartServer *pThread = new CStartServer();
+	 
+	if ( pThread == NULL )
+		return FALSE;
+	if (!pThread->CreateThread(CREATE_SUSPENDED))
+	{
+		delete pThread;
+		return FALSE;
+	}
+	pThread->ResumeThread();
+
 	ShowWindow(SW_MAXIMIZE);
 	//CRect rect6(1110,168, 1671,228);//old huaiµÄ pic
 	CRect rect6(604,185,1161,254);

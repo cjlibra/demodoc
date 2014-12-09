@@ -207,6 +207,9 @@
     <ClInclude Include="Dlgdlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="StartServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="demodoc.cpp">
@@ -264,6 +267,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Dlgdlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StartServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
