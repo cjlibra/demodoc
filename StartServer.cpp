@@ -125,8 +125,8 @@ unsigned int CStartServer::StartServer(LPVOID lParam)
         }
         else
         {
-            char szRecvMsg[256] = {0};
-            char szOutMsg[256] = {0};    
+            char szRecvMsg[5256] = {0};
+            char szOutMsg[5256] = {0};    
             
                 //接收客户端内容:阻塞
             serverSocket.Receive(szRecvMsg, 256);
@@ -141,7 +141,7 @@ unsigned int CStartServer::StartServer(LPVOID lParam)
            // serverSocket.Send("Have Receive The Msg", 50);
 
                 //关闭
-            serverSocket.Close();
+             serverSocket.Close();
         }
         
     }

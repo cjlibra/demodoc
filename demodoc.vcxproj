@@ -146,6 +146,7 @@
     <ClInclude Include="demodocDlg.h" />
     <ClInclude Include="DirListCtrlDlg.h" />
     <ClInclude Include="Dlgdlg.h" />
+    <ClInclude Include="explorer1.h" />
     <ClInclude Include="FileListDlg.h" />
     <ClInclude Include="FirstDlg.h" />
     <ClInclude Include="LoginDlg.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThirdDlg.h" />
     <ClInclude Include="ThirdoneDlg.h" />
+    <ClInclude Include="WebFilelistDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddinfoDlg.cpp" />
@@ -170,6 +172,7 @@
     <ClCompile Include="demodocDlg.cpp" />
     <ClCompile Include="DirListCtrlDlg.cpp" />
     <ClCompile Include="Dlgdlg.cpp" />
+    <ClCompile Include="explorer1.cpp" />
     <ClCompile Include="FileListDlg.cpp" />
     <ClCompile Include="FirstDlg.cpp" />
     <ClCompile Include="LoginDlg.cpp" />
@@ -189,6 +192,7 @@
     </ClCompile>
     <ClCompile Include="ThirdDlg.cpp" />
     <ClCompile Include="ThirdoneDlg.cpp" />
+    <ClCompile Include="WebFilelistDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="demodoc.rc" />
@@ -198,7 +202,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="demodoc.rc" _x007B_CA8A9780-280D-11CF-A24D-444553540000_x007D_="CPdf1" />
+      <UserProperties RESOURCE_FILE="demodoc.rc" _x007B_CA8A9780-280D-11CF-A24D-444553540000_x007D_="CPdf1" _x007B_8856F961-340A-11D0-A96B-00C04FD705A2_x007D_="CExplorer1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

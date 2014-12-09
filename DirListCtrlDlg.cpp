@@ -8,6 +8,7 @@
 
 
 #include "FileListDlg.h"
+#include "WebFilelistDlg.h"
 
 
 // CDirListCtrlDlg ¶Ô»°¿ò
@@ -43,7 +44,8 @@ BOOL CDirListCtrlDlg::OnInitDialog()
     BOOL bWorking=finder.FindFile(totoaldir);
 	howmuchbutton=0;
 	CString titlebutton[200];
-	CFileListDlg dlg;
+	//CFileListDlg dlg;
+	CWebFilelistDlg dlg;
 	dlg.nowdir = currdir;
 	dlg.filecount = 0;
 	int flagfile = 0;

@@ -210,6 +210,12 @@
     <ClInclude Include="StartServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="WebFilelistDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="explorer1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="demodoc.cpp">
@@ -270,6 +276,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="StartServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WebFilelistDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="explorer1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
