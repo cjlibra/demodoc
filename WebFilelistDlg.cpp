@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 
 #include "PdfViewDlg.h"
+#include "DirListCtrlDlg.h"
 
 // CWebFilelistDlg 对话框
 
@@ -171,7 +172,7 @@ BOOL CWebFilelistDlg::OnInitDialog()
 		//strOut = NULL;
 		 
 	}
-	Sleep(3000);
+	//Sleep(3000);
 	m_webctrl.Navigate("http://127.0.0.1:9001/default.html", NULL, NULL, NULL, NULL);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -202,8 +203,16 @@ void CWebFilelistDlg::OnTimer(UINT_PTR nIDEvent)
 			//SetTimer(1,1000,NULL);
 			return;
 		}
-		 
-		int n = sstr.Find(" ");
+		if (sstr.Find("99999") > 0){
+			CDialogEx::OnCancel();
+			return;
+		}
+		if (sstr.Find("77777") > 0){
+			((CDirListCtrlDlg *)GetParent())->OnMyCancel();
+			CDialogEx::OnCancel();
+			return;
+		}
+		int n = sstr.ReverseFind(' ');
 		if (n <= 2){
 			file.Close();
 			delete readbuf;
@@ -283,7 +292,11 @@ void CWebFilelistDlg::CopyToUdisk(CString path,CString filename)
         AfxMessageBox("没有找到u盘");
 		return;
 	}
-	if (true == ::CopyFile(path+"\\"+filename,uDisk+filename,false)){
+	int nlen = filename.GetLength();
+	char *szGbk = new char [nlen+1];
+	memset(szGbk,0,nlen+1);
+	UTF82GBK(filename.GetBuffer(0),szGbk,nlen )  ;
+	if (true == ::CopyFile(path+"\\"+szGbk,uDisk+szGbk,false)){
 		AfxMessageBox("下载成功");
 	}else{
 		AfxMessageBox("下载出错");
