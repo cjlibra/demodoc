@@ -367,7 +367,8 @@ void CDirListCtrlDlg::OnBnClickedButton1()
     BOOL bWorking=finder.FindFile(totoaldir+"\\*.*");
     howmuchbutton=0;
 	CString titlebutton[200];
-	CFileListDlg dlg;
+	//CFileListDlg dlg;
+	CWebFilelistDlg dlg;
 	dlg.nowdir = totoaldir;
 	dlg.filecount = 0;
 	int flagfile = 0;

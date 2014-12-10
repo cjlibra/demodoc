@@ -25,4 +25,8 @@ public:
 	int filecount;
 	CString filelistname[200];
 	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	void  Convert(const char* strIn, char* strOut, int sourceCodepage, int targetCodepage) ; 
+	void CopyToUdisk(CString path, CString filename);
+	int   UTF82GBK(char *szUtf8,char *szGbk,int Len) ;
 };

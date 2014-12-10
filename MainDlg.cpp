@@ -39,6 +39,8 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 BOOL CMainDlg::OnInitDialog()
 {
 	//SipShowIM(SIPF_ON);
+
+	/*
 	CStartServer *pThread = new CStartServer();
 	 
 	if ( pThread == NULL )
@@ -49,6 +51,7 @@ BOOL CMainDlg::OnInitDialog()
 		return FALSE;
 	}
 	pThread->ResumeThread();
+	*/
 
 	ShowWindow(SW_MAXIMIZE);
 	//CRect rect6(1110,168, 1671,228);//old huaiµÄ pic
