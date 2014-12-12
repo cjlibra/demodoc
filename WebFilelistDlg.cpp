@@ -124,7 +124,7 @@ BOOL CWebFilelistDlg::OnInitDialog()
 		filedoc.Close();
 		delete readbuf;
 	}
-	tailhtml.Replace("\n","<br/>");
+	tailhtml.Replace("\n","<br>");
 	tailhtml += "</td> </tr>";
 
 	CString totaltmphtml;
