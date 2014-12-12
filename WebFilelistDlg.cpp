@@ -52,13 +52,13 @@ BOOL CWebFilelistDlg::OnInitDialog()
 		 <tr class=\"whf.css\"  >\
 		 <td bgcolor=\"#FFFFFF\" class=\"whf\" >{{*num*}}</td>\
 		 <td align=\"center\" bgcolor=\"#FFFFFF\" class=\"whf\">{{*doc*}}</td>\
-		 <td align=\"center\" bgcolor=\"#FFFFFF\">{{*shuoming*}}</td>\
+		 <td align=\"center\" bgcolor=\"#FFFFFF\" class=\"whf\">{{*shuoming*}}</td>\
          <td align=\"center\" bgcolor=\"#FFFFFF\">\
 	     <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\
          <tbody>\
          <tr>\
-		 <td height=\"120\" align=\"center\">{{*downimg*}}</td>\
-		 <td align=\"center\">{{*viewimg*}}</td>\
+		 <td width = \"250\" height=\"120\" align=\"center\">{{*downimg*}}</td>\
+		 <td width = \"250\" align=\"center\">{{*viewimg*}}</td>\
          </tr>\
          </tbody>\
          </table>\
