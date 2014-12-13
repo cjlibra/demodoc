@@ -64,8 +64,8 @@ BOOL CWebFilelistDlg::OnInitDialog()
          </table>\
 		 </td>\
          </tr>";
-	CString downhtml = "<a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=0\" ><img src=\"images/xiaz.jpg\" width=\"100\" height=\"100\" alt=\"\"/> </a>";
-	CString viewhtml = " <a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=1\" ><img src=\"images/chak.jpg\" width=\"100\" height=\"100\" alt=\"\"/> </a>";
+	CString downhtml = "<a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=0\" ><img src=\"images/xiaz.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>";
+	CString viewhtml = " <a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=1\" ><img src=\"images/chak.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>";
 		
 	CString tableshtml;
 	CFile filedoc;
@@ -141,8 +141,12 @@ BOOL CWebFilelistDlg::OnInitDialog()
 	}
 	CString cailiaoqingdan;
 	int nnindex = nowdir.ReverseFind('\\');
-	cailiaoqingdan=nowdir.Right(nowdir.GetLength()-nnindex-1);
-	totaltmphtml.Replace("{{*title*}}",cailiaoqingdan+"材料清单");
+	//cailiaoqingdan=nowdir.Right(nowdir.GetLength()-nnindex-1);
+	cailiaoqingdan=nowdir;
+	cailiaoqingdan.Replace("\\","-");
+	cailiaoqingdan.Replace("市场监督管理局-"," ");
+	cailiaoqingdan =cailiaoqingdan.Trim();
+	totaltmphtml.Replace("{{*title*}}",cailiaoqingdan+"提交的材料清单");
 	totaltmphtml.Replace("{{*content*}}",tableshtml);
 	totaltmphtml.Replace("{{*tail*}}",tailhtml);
 
