@@ -9,6 +9,11 @@
 #include "PdfViewDlg.h"
 #include "DirListCtrlDlg.h"
 
+
+
+
+//#include "windef.h"
+
 // CWebFilelistDlg 对话框
 
 IMPLEMENT_DYNAMIC(CWebFilelistDlg, CDialogEx)
@@ -36,7 +41,16 @@ END_MESSAGE_MAP()
 
 
 // CWebFilelistDlg 消息处理程序
+int CWebFilelistDlg::IntFromStr(CString str)
+{
+	int ipos = str.Find(_T(" "));
+	if (ipos <= 0 ) return 0;
+	int num = atoi(str.Left(ipos));
+	return num;
 
+
+
+}
 
 BOOL CWebFilelistDlg::OnInitDialog()
 {
@@ -48,7 +62,7 @@ BOOL CWebFilelistDlg::OnInitDialog()
 	CRect rect;
 	this->GetClientRect(&rect);
 	this->m_webctrl.MoveWindow(&rect);
-	CString tablehtml = "  \
+	CString tablehtml = _T("  \
 		 <tr class=\"whf.css\"  >\
 		 <td bgcolor=\"#FFFFFF\" class=\"whf\" >{{*num*}}</td>\
 		 <td align=\"center\" bgcolor=\"#FFFFFF\" class=\"whf\">{{*doc*}}</td>\
@@ -63,10 +77,36 @@ BOOL CWebFilelistDlg::OnInitDialog()
          </tbody>\
          </table>\
 		 </td>\
-         </tr>";
-	CString downhtml = "<a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=0\" ><img src=\"images/xiaz.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>";
-	CString viewhtml = " <a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=1\" ><img src=\"images/chak.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>";
-		
+         </tr>");
+	CString downhtml = _T("<a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=0\" ><img src=\"images/xiaz.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>");
+	CString viewhtml = _T(" <a href=\"http://127.0.0.1:9001/default.html?file={{*fname*}}&act=1\" ><img src=\"images/chak.jpg\" width=\"70\" height=\"70\" alt=\"\"/> </a>");
+	CString sortsetfile[400];
+	int sortsetfilecount =0;
+	for (int i=0;i<filecount;i++){
+		if (filelistname[i].Right(4) == _T(".set")){
+			sortsetfile[i]=filelistname[i];
+			sortsetfilecount++;
+
+		}
+	}
+	CString tmpstrstr;	
+	for (int i =0;i<sortsetfilecount-1;i++){
+
+		for (int j=0;j<sortsetfilecount-1-i;j++){
+			if (IntFromStr(sortsetfile[j]) > IntFromStr(sortsetfile[j+1]) ){
+			   tmpstrstr = sortsetfile[j];
+			   sortsetfile[j] = sortsetfile[j+1];
+			   sortsetfile[j+1]= tmpstrstr ;
+			}
+
+		}
+
+	}
+	for (int i=0;i<sortsetfilecount;i++){
+
+		filelistname[i] = sortsetfile[i];
+
+	}
 	CString tableshtml;
 	CFile filedoc;
 	CString subfilename[4];
@@ -80,6 +120,24 @@ BOOL CWebFilelistDlg::OnInitDialog()
 			AfxExtractSubString(subfilename[2], (LPCTSTR)tmpstr, 2, ' ');
 			AfxExtractSubString(subfilename[3], (LPCTSTR)tmpstr, 3, ' ');
 	//		this->m_filelistctrl.SetItemHeight(i,n+11);
+			if (subfilename[1].Find("#####") > 0){
+				CFile  filed;
+				if(filed.Open(nowdir+"\\"+this->filelistname[i],CFile::modeRead)){
+					char *readbuf;
+					int ncount = filed.GetLength();
+					readbuf = new char [ncount+1];
+					memset(readbuf,0,ncount+1);
+					filed.Read(readbuf,ncount);
+					subfilename[1] = readbuf; 
+					filed.Close();
+					delete readbuf;
+	
+				}else{
+                   subfilename[1] = tmpstr+"打不开";
+
+				}
+				
+			}
 			tablehtml1.Replace("{{*num*}}",subfilename[0]);
 			tablehtml1.Replace("{{*doc*}}",subfilename[1]);
 			tablehtml1.Replace("{{*shuoming*}}",subfilename[2]);
@@ -177,8 +235,16 @@ BOOL CWebFilelistDlg::OnInitDialog()
 		 
 	}
 	//Sleep(3000);
-	m_webctrl.Navigate("http://127.0.0.1:9001/default.html", NULL, NULL, NULL, NULL);
+	//m_webctrl.Refresh();
+	CString urlstr ="http://127.0.0.1:9001/default.html";
+	DWORD timed = ::GetTickCount();
+	CString tmptimed;
+	tmptimed.Format("%ld",timed);
+	CString tmptmp = "?time=";
+	urlstr = urlstr+tmptmp+tmptimed;
 
+	 m_webctrl.Navigate(urlstr, NULL, NULL, NULL, NULL);
+	 // m_webctrl.Refresh();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }

@@ -29,4 +29,5 @@ public:
 	void  Convert(const char* strIn, char* strOut, int sourceCodepage, int targetCodepage) ; 
 	void CopyToUdisk(CString path, CString filename);
 	int   UTF82GBK(char *szUtf8,char *szGbk,int Len) ;
+	int IntFromStr(CString str);
 };

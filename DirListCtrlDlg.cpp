@@ -372,10 +372,20 @@ void CDirListCtrlDlg::OnBnClickedButton1()
 	dlg.nowdir = totoaldir;
 	dlg.filecount = 0;
 	int flagfile = 0;
+	
     while(bWorking)
     {
 
 		bWorking=finder.FindNextFile();
+		/*
+		if (bWorking == 0){
+		   DWORD err = GetLastError();
+		   if (ERROR_NO_MORE_FILES != err){
+			bWorking = 1;
+			
+		   }
+		}
+		*/
 		if (finder.IsDots()){
 			continue;
 		}
